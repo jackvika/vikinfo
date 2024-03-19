@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Donation</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Vikinfo</h1>
+      <h5>Donate books and get free donated books</h5>
+    </div>
+  </header>
+
+  <div class="container buttons-container">
+    <button class="button donate-button">Donate Book</button>
+    <button class="button free-books-button">Free Donated Books</button>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 Vikinfo. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script>
+    
+    const firebaseConfig = {
+  apiKey: "AIzaSyD0LBV2bWtWh4WdkzUXhFxb85cV-xddmy0",
+  authDomain: "vikinfo-book-donation.firebaseapp.com",
+  projectId: "vikinfo-book-donation",
+  storageBucket: "vikinfo-book-donation.appspot.com",
+  messagingSenderId: "273736513491",
+  appId: "1:273736513491:web:291a93bf9bb137c0026126",
+  measurementId: "G-D994S4FHX4"
+};
+
+try {
+      firebase.initializeApp(firebaseConfig);
+    } catch (error) {
+      console.error("Error initializing Firebase:", error);
+    }
+
+
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (!user) {
+        // User is not logged in, redirect to index.html
+        window.location.href = "index.html";
+      }
+    });
+  </script>
+</body>
+</html>
+

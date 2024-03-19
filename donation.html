@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donate a Book</title>
+  <link rel="stylesheet" href="donation.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Vikinfo</h1>
+      <h5>Donate books and getfree donated books</h5>
+    </div>
+  </header>
+
+  <div class="container donation-form">
+    <h2>Book Donation</h2>
+    <form id="donationForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required aria-label="Name">
+    
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required aria-label="Email">
+    
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" required aria-label="Phone Number">
+    
+      <label for="bookTitle">Book Title:</label>
+      <input type="text" id="bookTitle" name="bookTitle" required aria-label="Book Title">
+    
+      <label for="bookDescription">Book Description:</label>
+      <textarea id="bookDescription" name="bookDescription" required aria-label="Book Description"></textarea>
+    
+      <label for="address">Address:</label>
+      <textarea id="address" name="address" required aria-label="Address for Pickup"></textarea>
+    
+      <label for="bookImage">Book Image:</label>
+      <input type="file" id="bookImage" name="bookImage" accept="image/*" required aria-label="Book Image">
+    
+      <button type="submit" class="button donate-button">Submit</button>
+    </form>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 Vikinfo. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+  <!-- Include Firebase Firestore if you plan to use it -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+  <script>
+    // Initialize Firebase and Firestore
+    const firebaseConfig = {
+      apiKey: "AIzaSyD0LBV2bWtWh4WdkzUXhFxb85cV-xddmy0",
+      authDomain: "vikinfo-book-donation.firebaseapp.com",
+      projectId: "vikinfo-book-donation",
+      storageBucket: "vikinfo-book-donation.appspot.com",
+      messagingSenderId: "273736513491",
+      appId: "1:273736513491:web:291a93bf9bb137c0026126",
+      measurementId: "G-D994S4FHX4"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // Update Firebase Storage rules to allow read and write access
+    const storage = firebase.storage();
+    storage.rules = `service firebase.storage {
+      match /b/{bucket}/o {
+        match /{allPaths=**} {
+          allow read, write: if true;
+        }
+      }
+    }`;
+
+    // Form submission event listener
+    document.getElementById('donationForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      // Get form data
+      const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        bookTitle: document.getElementById('bookTitle').value,
+        bookDescription: document.getElementById('bookDescription').value,
+        address: document.getElementById('address').value
+      };
+
+      // Get the file uploaded by the user
+      const file = document.getElementById('bookImage').files[0];
+
+      // Create a storage reference with a unique name
+      const storageRef = storage.ref(`book_images/${file.name}`);
+
+      // Upload the file to Firebase Storage
+      storageRef.put(file)
+        .then((snapshot) => {
+          // Get the download URL of the uploaded image
+          return snapshot.ref.getDownloadURL();
+        })
+        .then((downloadURL) => {
+          // Add download URL to form data
+          formData.bookImageURL = downloadURL;
+
+          // Add donation details to Firestore
+          return db.collection('book_donation_data').add(formData); // Change 'book_donations' to your desired collection name
+        })
+        .then(() => {
+          // Redirect to thank you page upon successful submission
+          window.location.href = "thankyou.html";
+        })
+        .catch(error => {
+          console.error('Error adding document: ', error);
+          alert('An error occurred. Please try again later.');
+        });
+    });
+  </script>
+</body>
+</html>
