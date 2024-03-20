@@ -45,6 +45,10 @@
     </div>
   </footer>
   
+  <!-- Include Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js"></script>
+
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
     import { getAuth, signInWithPopup, signInWithPhoneNumber, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
@@ -118,7 +122,8 @@
         <img src="${user.photoURL}" alt="Profile Picture" width="100">
       `;
 
-      setTimeout(redirectToHomePage, 2000); 
+      setTimeout(redirectToHomePage, 2000
+      ); 
     }
 
     function redirectToHomePage() {
@@ -127,4 +132,5 @@
   </script>
 </body>
 </html>
+
 
