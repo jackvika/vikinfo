@@ -1,5 +1,3 @@
-<!-- temporary page for testing -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,15 +16,14 @@
 
   <section class="hero">
     <div class="container">
-     
       <h2>Welcome to Vikinfo</h2>
-      <p>You have to register or signin using google for donate books and get donated books</p>
+      <p>You have to register or sign in using Google to donate books and get donated books</p>
 
       <nav>
         <button class="google-button" id="signInGoogleBtn">Google</button>
       </nav>
 
-          <h5>OR</h5>
+      <h5>OR</h5>
 
       <div id="phone-login-form"> 
         <label for="phone">Phone Number:</label>
@@ -48,27 +45,24 @@
     </div>
   </footer>
   
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-  <script>
-    
-const firebaseConfig = {
-  apiKey: "AIzaSyD0LBV2bWtWh4WdkzUXhFxb85cV-xddmy0",
-  authDomain: "vikinfo-book-donation.firebaseapp.com",
-  projectId: "vikinfo-book-donation",
-  storageBucket: "vikinfo-book-donation.appspot.com",
-  messagingSenderId: "273736513491",
-  appId: "1:273736513491:web:291a93bf9bb137c0026126",
-  measurementId: "G-D994S4FHX4"
-};
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
+    import { getAuth, signInWithPopup, signInWithPhoneNumber, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD0LBV2bWtWh4WdkzUXhFxb85cV-xddmy0",
+      authDomain: "vikinfo-book-donation.firebaseapp.com",
+      projectId: "vikinfo-book-donation",
+      storageBucket: "vikinfo-book-donation.appspot.com",
+      messagingSenderId: "273736513491",
+      appId: "1:273736513491:web:291a93bf9bb137c0026126",
+      measurementId: "G-D994S4FHX4"
+    };
 
     firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
+    const auth = getAuth();
 
-   
     document.getElementById('signInGoogleBtn').addEventListener('click', signInWithGoogle);
-
-    
     document.getElementById('sendCodeBtn').addEventListener('click', sendVerificationCode);
     document.getElementById('verifyCodeBtn').addEventListener('click', verifyCode);
 
@@ -76,7 +70,7 @@ const firebaseConfig = {
 
     function signInWithGoogle() {
       const provider = new firebase.auth.GoogleAuthProvider();
-      auth.signInWithPopup(provider)
+      signInWithPopup(auth, provider)
         .then((result) => {
           console.log('Signed in with Google successfully', result.user.displayName);
           displayUserInfo(result.user); 
@@ -87,23 +81,21 @@ const firebaseConfig = {
     }
 
     function sendVerificationCode() {
-  const phoneNumber = document.getElementById('phone').value;
-  const phoneLoginForm = document.getElementById('phone-login-form');
-  phoneLoginForm.innerHTML = ''; 
-  const appVerifier = new firebase.auth.RecaptchaVerifier('phone-login-form'); 
+      const phoneNumber = document.getElementById('phone').value;
+      const phoneLoginForm = document.getElementById('phone-login-form');
+      phoneLoginForm.innerHTML = ''; 
+      const appVerifier = new RecaptchaVerifier('phone-login-form');
 
-  auth.signInWithPhoneNumber(phoneNumber, appVerifier)
-    .then((confirmation) => {
-      confirmationResult = confirmation;
-      phoneLoginForm.style.display = 'none'; 
-      document.getElementById('verification-form').style.display = 'block';
-    })
-    .catch((error) => {
-      console.error("Error sending verification code:", error);
-    });
-}
-
-
+      signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+        .then((confirmation) => {
+          confirmationResult = confirmation;
+          phoneLoginForm.style.display = 'none'; 
+          document.getElementById('verification-form').style.display = 'block';
+        })
+        .catch((error) => {
+          console.error("Error sending verification code:", error);
+        });
+    }
 
     function verifyCode() {
       const verificationCode = document.getElementById('verificationCode').value;
@@ -118,23 +110,20 @@ const firebaseConfig = {
     }
 
     function displayUserInfo(user) {
-  const userInfoContainer = document.getElementById('user-info');
-  userInfoContainer.innerHTML = `
-    <p>Successfully Signed In, Redirecting...</p>
-    <p>Email: ${user.email}</p>
-    <p>Phone Number: ${user.phoneNumber}</p>
-    <img src="${user.photoURL}" alt="Profile Picture" width="100">
-  `;
+      const userInfoContainer = document.getElementById('user-info');
+      userInfoContainer.innerHTML = `
+        <p>Successfully Signed In, Redirecting...</p>
+        <p>Email: ${user.email}</p>
+        <p>Phone Number: ${user.phoneNumber}</p>
+        <img src="${user.photoURL}" alt="Profile Picture" width="100">
+      `;
 
-  
-  setTimeout(redirectToHomePage, 2000); 
-}
+      setTimeout(redirectToHomePage, 2000); 
+    }
 
-function redirectToHomePage() {
-  window.location.href = "https://lippy-stumps.000webhostapp.com/main.html";
-}
-
-
+    function redirectToHomePage() {
+      window.location.href = "https://lippy-stumps.000webhostapp.com/main.html";
+    }
   </script>
 </body>
 </html>
