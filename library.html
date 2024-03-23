@@ -28,13 +28,13 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
   <script>
     const firebaseConfig = {
-      apiKey: "AIzaSyD0LBV2bWtWh4WdkzUXhFxb85cV-xddmy0",
-      authDomain: "vikinfo-book-donation.firebaseapp.com",
-      projectId: "vikinfo-book-donation",
-      storageBucket: "vikinfo-book-donation.appspot.com",
-      messagingSenderId: "273736513491",
-      appId: "1:273736513491:web:291a93bf9bb137c0026126",
-      measurementId: "G-D994S4FHX4"
+      apiKey: "<your-api-key>",
+      authDomain: "<your-auth-domain>",
+      projectId: "<your-project-id>",
+      storageBucket: "<your-storage-bucket>",
+      messagingSenderId: "<your-messaging-sender-id>",
+      appId: "<your-app-id>",
+      measurementId: "<your-measurement-id>"
     };
     
     firebase.initializeApp(firebaseConfig);
@@ -44,14 +44,10 @@
     function generateBookCard(book) {
       return `
         <div class="card">
-          <img src="${book.imageUrl}" alt="${book.title}" class="book-image">
+          <img src="${book.bookImageURL}" alt="${book.bookTitle}" class="book-image">
           <div class="card-body">
-            <h5 class="card-title">${book.title}</h5>
-            <p class="card-text">${book.description}</p>
-            <button class="request-button" onclick="redirectToForm('${book.id}')">Request This Book</button>
-          </div>
-          <div class="card-footer">
-            <button class="free-button">Free Book</button>
+            <h5 class="card-title">${book.bookTitle}</h5>
+            <p class="card-text">${book.bookDescription}</p>
           </div>
         </div>
       `;
@@ -60,8 +56,7 @@
     // Function to append donated book cards to the container
     function renderDonatedBooks() {
       const container = document.getElementById("bookContainer");
-      container.innerHTML = ""; // Clear previous content
-      db.collection("donated_books").get().then((querySnapshot) => {
+      db.collection("book_donation_data").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           const book = doc.data();
           const card = generateBookCard(book);
@@ -72,14 +67,9 @@
       });
     }
 
-    // Function to redirect to the form with book ID parameter
-    function redirectToForm(bookId) {
-      // Redirect to the form page with the book ID parameter
-      window.location.href = `form.html?bookId=${bookId}`;
-    }
-
     // Call the function to render donated books when the page loads
     window.onload = renderDonatedBooks;
   </script>
 </body>
 </html>
+
