@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Book Donation</title>
+  
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,20 +23,20 @@
       <p>You have to register or sign in using Google to donate books and get donated books</p>
 
       <nav>
-        <button class="google-button" id="signInGoogleBtn">Google</button>
+        <button class="btn btn-primary" id="signInGoogleBtn">Google</button>
       </nav>
 
       <h5>OR</h5>
 
       <div id="phone-login-form"> 
         <label for="phone">Phone Number:</label>
-        <input type="tel" id="phone" placeholder="Enter phone number">
-        <button class="phone-button" id="sendCodeBtn">Send Code</button>
+        <input type="tel" id="phone" class="form-control" placeholder="Enter phone number">
+        <button class="btn btn-primary" id="sendCodeBtn">Send Code</button>
       </div>
       <div id="verification-form" style="display: none;">
         <label for="verificationCode">Verification Code:</label>
-        <input type="text" id="verificationCode" placeholder="Enter verification code">
-        <button id="verifyCodeBtn">Verify Code</button>
+        <input type="text" id="verificationCode" class="form-control" placeholder="Enter verification code">
+        <button class="btn btn-primary" id="verifyCodeBtn">Verify Code</button>
       </div>          
       <div id="user-info"></div>
     </div>
@@ -45,6 +48,7 @@
     </div>
   </footer>
   
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  
   <script src="https://www.gstatic.com/firebasejs/9.12.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.12.1/firebase-auth-compat.js"></script>
 
