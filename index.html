@@ -4,49 +4,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Book Donation</title>
-  
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
 </head>
 <body>
-  <header>
+  <header class="bg-dark text-light py-4">
     <div class="container">
-      <h1>Vikinfo</h1>
-      <h5>Donate books and get free donated books</h5>
+      <h1 class="mb-0">Vikinfo</h1>
+      <h5 class="mb-0">Donate books and get free donated books</h5>
     </div>
   </header>
 
   <section class="hero">
     <div class="container">
       <h2>Welcome to Vikinfo</h2>
-      <p>You have to register or sign in using Google to donate books and get donated books</p>
+      <p class="mb-4">You have to register or sign in using Google to donate books and get donated books</p>
 
-      <nav>
-        <button class="btn btn-primary" id="signInGoogleBtn">Google</button>
+      <nav class="mb-4">
+        <button class="btn btn-primary" id="signInGoogleBtn">Sign in with Google</button>
       </nav>
 
       <h5>OR</h5>
 
-      <div id="phone-login-form"> 
+      <div id="phone-login-form" class="mb-4"> 
         <label for="phone">Phone Number:</label>
         <input type="tel" id="phone" class="form-control" placeholder="Enter phone number">
-        <button class="btn btn-primary" id="sendCodeBtn">Send Code</button>
+        <button class="btn btn-primary mt-2" id="sendCodeBtn">Send Code</button>
       </div>
       <div id="verification-form" style="display: none;">
         <label for="verificationCode">Verification Code:</label>
         <input type="text" id="verificationCode" class="form-control" placeholder="Enter verification code">
-        <button class="btn btn-primary" id="verifyCodeBtn">Verify Code</button>
+        <button class="btn btn-primary mt-2" id="verifyCodeBtn">Verify Code</button>
       </div>          
       <div id="user-info"></div>
     </div>
   </section>
 
-  <footer>
+  <footer class="bg-dark text-light py-3">
     <div class="container">
-      <p>&copy; 2024 Vikinfo. All rights reserved.</p>
+      <p class="mb-0">&copy; 2024 Vikinfo. All rights reserved.</p>
     </div>
   </footer>
-  
+
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  
   <script src="https://www.gstatic.com/firebasejs/9.12.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.12.1/firebase-auth-compat.js"></script>
