@@ -81,34 +81,34 @@
 
       <h5 class="text-center mb-3">OR</h5>
 
-      <div id="phone-login-form" class="mb-4"> 
-        <div class="row">
-          <div class="col-md-8 offset-md-2"> 
-            <label for="phone" class="d-block">Phone Number:</label>
-            <input type="tel" id="phone" class="form-control mb-2" placeholder="Enter phone number">
-          </div>
+      <div id="phone-login-form" class="mb-4">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form>
+                <div class="form-group">
+                    <label for="phone" class="d-block">Phone Number:</label>
+                    <input type="tel" id="phone" class="form-control mb-2" placeholder="Enter phone number">
+                </div>
+                <button class="btn btn-primary btn-block" id="sendCodeBtn">Send Code</button>
+            </form>
         </div>
-        <div class="row">
-          <div class="col-md-8 offset-md-2"> 
-            <button class="btn btn-primary btn-sm" style="width: auto;" id="sendCodeBtn">Send Code</button>
-          </div>
-        </div>
-      </div>
+    </div>
+</div>
 
-      <div id="verification-form" style="display: none;">
-        <div class="row">
-          <div class="col-md-8 offset-md-2"> 
-            <label for="verificationCode" class="d-block">Verification Code:</label>
-            <input type="text" id="verificationCode" class="form-control mb-2" placeholder="Enter verification code">
-          </div>
+<div id="verification-form" style="display: none;">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form>
+                <div class="form-group">
+                    <label for="verificationCode" class="d-block">Verification Code:</label>
+                    <input type="text" id="verificationCode" class="form-control mb-2" placeholder="Enter verification code">
+                </div>
+                <button class="btn btn-primary btn-block" id="verifyCodeBtn">Verify Code</button>
+            </form>
         </div>
-        <div class="row">
-          <div class="col-md-8 offset-md-2"> 
-            <button class="btn btn-primary btn-sm" style="width: auto;" id="verifyCodeBtn">Verify Code</button>
-          </div>
-        </div>
-      </div>
-      
+    </div>
+</div>
+
       <div id="user-info"></div>
     </div>
   </section>
