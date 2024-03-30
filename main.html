@@ -22,7 +22,10 @@
     }
     .container {
       height: 100%;
-      overflow-y: auto; /* Add scrollbars if needed */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
   </style>
 </head>
@@ -34,7 +37,7 @@
     </div>
   </header>
 
-  <div class="container d-flex flex-column align-items-center justify-content-center">
+  <div class="container">
     <div class="row">
       <div class="col-md-6 mb-3">
         <button class="btn btn-custom btn-block">Donate Book</button>
