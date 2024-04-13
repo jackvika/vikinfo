@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Book Donation</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <style>
     /* Custom styles */
     .btn-custom {
@@ -31,28 +32,24 @@
   </style>
 </head>
 <body>
-  <header class="bg-primary text-light py-4">
-    <div class="container text-center">
-      <h1>Vikinfo</h1>
-      <h5>Donate books and get free donated books</h5>
-    </div>
+  <header class="w3-container w3-blue w3-center py-4">
+    <h1>Vikinfo</h1>
+    <h5>Donate books and get free donated books</h5>
   </header>
 
   <div class="container">
     <div class="row">
       <div class="col-md-6 mb-3">
-        <button class="btn btn-custom btn-block">Donate</button>
+        <button class="btn btn-custom btn-block w3-round-large w3-hover-blue">Donate</button>
       </div>
       <div class="col-md-6 mb-3">
-        <button class="btn btn-custom btn-block">Get Book</button>
+        <button class="btn btn-custom btn-block w3-round-large w3-hover-blue">Get Book</button>
       </div>
     </div>
   </div>
 
-  <footer class="bg-primary text-light py-3 fixed-bottom">
-    <div class="container text-center">
-      <p class="mb-0">&copy; 2024 Vikinfo. All rights reserved.</p>
-    </div>
+  <footer class="w3-container w3-blue w3-center py-3 fixed-bottom">
+    <p>&copy; 2024 Vikinfo. All rights reserved.</p>
   </footer>
 
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -60,21 +57,20 @@
   <script>
     
     const firebaseConfig = {
-  apiKey: "AIzaSyD0LBV2bWtWh4WdkzUXhFxb85cV-xddmy0",
-  authDomain: "vikinfo-book-donation.firebaseapp.com",
-  projectId: "vikinfo-book-donation",
-  storageBucket: "vikinfo-book-donation.appspot.com",
-  messagingSenderId: "273736513491",
-  appId: "1:273736513491:web:291a93bf9bb137c0026126",
-  measurementId: "G-D994S4FHX4"
-};
+      apiKey: "AIzaSyD0LBV2bWtWh4WdkzUXhFxb85cV-xddmy0",
+      authDomain: "vikinfo-book-donation.firebaseapp.com",
+      projectId: "vikinfo-book-donation",
+      storageBucket: "vikinfo-book-donation.appspot.com",
+      messagingSenderId: "273736513491",
+      appId: "1:273736513491:web:291a93bf9bb137c0026126",
+      measurementId: "G-D994S4FHX4"
+    };
 
-try {
+    try {
       firebase.initializeApp(firebaseConfig);
     } catch (error) {
       console.error("Error initializing Firebase:", error);
     }
-
 
     firebase.auth().onAuthStateChanged(function(user) {
       if (!user) {
