@@ -4,10 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Book Donation Library</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="library.css">
 </head>
 <body>
-  <header>
+
+  <header class="w3-container w3-teal">
     <div class="container">
       <h1>Vikinfo</h1>
       <h5>Donate books and get free donated books</h5>
@@ -15,10 +18,10 @@
   </header>
 
   <div class="container" id="bookContainer">
-    <!-- Book cards will be dynamically added here -->
+    
   </div>
 
-  <footer>
+  <footer class="w3-container w3-teal">
     <div class="container">
       <p>&copy; 2024 Vikinfo. All rights reserved.</p>
     </div>
@@ -41,11 +44,10 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // Function to generate a book card
     function generateBookCard(book) {
       return `
         <div class="card">
-          <img src="${book.bookImageURL}" alt="${book.bookTitle}" class="book-image">
+          <img src="${book.bookImageURL}" alt="${book.bookTitle}" class="card-img-top">
           <div class="card-body">
             <h5 class="card-title">${book.bookTitle}</h5>
             <p class="card-text">${book.bookDescription}</p>
@@ -54,7 +56,6 @@
       `;
     }
 
-    // Function to append donated book cards to the container
     function renderDonatedBooks() {
       const container = document.getElementById("bookContainer");
       db.collection("book_donation_data").get().then((querySnapshot) => {
@@ -68,9 +69,9 @@
       });
     }
 
-    // Call the function to render donated books when the page loads
     window.onload = renderDonatedBooks;
   </script>
 </body>
 </html>
+
 
