@@ -3,43 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Donate a Book</title>
-  <link rel="stylesheet" href="donation.css">
+  <title>Book Donation Library</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f0f2f5;
+    }
+    .product-card {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      margin: 10px;
+      width: 100px;
+      height: 200px;
+      display: inline-block;
+      vertical-align: top;
+    }
+    .product-image {
+      width: 100%;
+      height: 100px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+    .product-details {
+      padding: 10px;
+    }
+    .product-title {
+      font-weight: bold;
+      color: #333333;
+      margin-bottom: 5px;
+      font-size: 12px;
+    }
+    .product-description {
+      color: #666666;
+      font-size: 10px;
+    }
+    footer {
+      background-color: #3b5998;
+      color: #ffffff;
+      padding: 20px 0;
+      text-align: center;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+  </style>
 </head>
 <body>
-  <header>
+
+  <header class="w3-container w3-teal">
     <div class="container">
       <h1>Vikinfo</h1>
-      <h5>Donate books and getfree donated books</h5>
+      <h5>Donate books and get free donated books</h5>
     </div>
   </header>
 
-  <div class="container donation-form">
-    <h2>Book Donation</h2>
-    <form id="donationForm">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required aria-label="Name">
+  <div class="container" id="bookContainer">
     
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required aria-label="Email">
-    
-      <label for="phone">Phone Number:</label>
-      <input type="tel" id="phone" name="phone" required aria-label="Phone Number">
-    
-      <label for="bookTitle">Book Title:</label>
-      <input type="text" id="bookTitle" name="bookTitle" required aria-label="Book Title">
-    
-      <label for="bookDescription">Book Description:</label>
-      <textarea id="bookDescription" name="bookDescription" required aria-label="Book Description"></textarea>
-    
-      <label for="address">Address:</label>
-      <textarea id="address" name="address" required aria-label="Address for Pickup"></textarea>
-    
-      <label for="bookImage">Book Image:</label>
-      <input type="file" id="bookImage" name="bookImage" accept="image/*" required aria-label="Book Image">
-    
-      <button type="submit" class="button donate-button">Submit</button>
-    </form>
   </div>
 
   <footer>
@@ -49,12 +70,8 @@
   </footer>
 
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-  <!-- Include Firebase Firestore if you plan to use it -->
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-
   <script>
-    // Initialize Firebase and Firestore
     const firebaseConfig = {
       apiKey: "AIzaSyD0LBV2bWtWh4WdkzUXhFxb85cV-xddmy0",
       authDomain: "vikinfo-book-donation.firebaseapp.com",
@@ -63,63 +80,38 @@
       messagingSenderId: "273736513491",
       appId: "1:273736513491:web:291a93bf9bb137c0026126",
       measurementId: "G-D994S4FHX4"
+  
     };
-
+    
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // Update Firebase Storage rules to allow read and write access
-    const storage = firebase.storage();
-    storage.rules = `service firebase.storage {
-      match /b/{bucket}/o {
-        match /{allPaths=**} {
-          allow read, write: if true;
-        }
-      }
-    }`;
+    function generateBookCard(book) {
+      return `
+        <div class="product-card">
+          <img src="${book.bookImageURL}" alt="${book.bookTitle}" class="product-image">
+          <div class="product-details">
+            <h5 class="product-title">${book.bookTitle}</h5>
+            <p class="product-description">${book.bookDescription}</p>
+          </div>
+        </div>
+      `;
+    }
 
-    // Form submission event listener
-    document.getElementById('donationForm').addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent default form submission
-
-      // Get form data
-      const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        bookTitle: document.getElementById('bookTitle').value,
-        bookDescription: document.getElementById('bookDescription').value,
-        address: document.getElementById('address').value
-      };
-
-      // Get the file uploaded by the user
-      const file = document.getElementById('bookImage').files[0];
-
-      // Create a storage reference with a unique name
-      const storageRef = storage.ref(`book_images/${file.name}`);
-
-      // Upload the file to Firebase Storage
-      storageRef.put(file)
-        .then((snapshot) => {
-          // Get the download URL of the uploaded image
-          return snapshot.ref.getDownloadURL();
-        })
-        .then((downloadURL) => {
-          // Add download URL to form data
-          formData.bookImageURL = downloadURL;
-
-          // Add donation details to Firestore
-          return db.collection('book_donation_data').add(formData); // Change 'book_donations' to your desired collection name
-        })
-        .then(() => {
-          // Redirect to thank you page upon successful submission
-          window.location.href = "thankyou.html";
-        })
-        .catch(error => {
-          console.error('Error adding document: ', error);
-          alert('An error occurred. Please try again later.');
+    function renderDonatedBooks() {
+      const container = document.getElementById("bookContainer");
+      db.collection("book_donation_data").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          const book = doc.data();
+          const card = generateBookCard(book);
+          container.innerHTML += card;
         });
-    });
+      }).catch((error) => {
+        console.error("Error fetching donated books: ", error);
+      });
+    }
+
+    window.onload = renderDonatedBooks;
   </script>
 </body>
 </html>
