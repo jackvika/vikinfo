@@ -10,21 +10,30 @@
     body {
       background-color: #f0f2f5;
     }
-    .card {
+    .product-card {
       background-color: #ffffff;
       border-radius: 10px;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
       margin-bottom: 20px;
+      overflow: hidden;
     }
-    .card-img-top {
+    .product-image {
+      width: 100%;
+      height: auto;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
     }
-    .card-title {
-      color: #333333;
+    .product-details {
+      padding: 20px;
     }
-    .card-text {
+    .product-title {
+      font-weight: bold;
+      color: #333333;
+      margin-bottom: 10px;
+    }
+    .product-description {
       color: #666666;
+      margin-bottom: 10px;
     }
     footer {
       background-color: #3b5998;
@@ -75,11 +84,11 @@
 
     function generateBookCard(book) {
       return `
-        <div class="card">
-          <img src="${book.bookImageURL}" alt="${book.bookTitle}" class="card-img-top">
-          <div class="card-body">
-            <h5 class="card-title">${book.bookTitle}</h5>
-            <p class="card-text">${book.bookDescription}</p>
+        <div class="product-card">
+          <img src="${book.bookImageURL}" alt="${book.bookTitle}" class="product-image">
+          <div class="product-details">
+            <h5 class="product-title">${book.bookTitle}</h5>
+            <p class="product-description">${book.bookDescription}</p>
           </div>
         </div>
       `;
@@ -102,6 +111,3 @@
   </script>
 </body>
 </html>
-
-
-
