@@ -6,6 +6,22 @@
   <title>Book Donation Library</title>
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      position: relative;
+      margin-bottom: 80px; /* Adjusted margin for footer */
+    }
+    footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 80px; /* Height of the footer */
+      background-color: #2196F3; /* Blue background */
+      color: white; /* White text */
+      text-align: center; /* Centered text */
+      line-height: 80px; /* Centered vertically */
+    }
+  </style>
 </head>
 <body>
 
@@ -18,7 +34,7 @@
     <div class="row" id="bookRow"></div>
   </div>
 
-  <footer class="w3-container w3-blue w3-center py-3">
+  <footer>
     <div class="container">
       <p>&copy; 2024 Vikinfo. All rights reserved.</p>
     </div>
@@ -43,17 +59,16 @@
     function generateBookCard(book) {
       return `
        <div class="col-md-4">
-  <div class="w3-card w3-padding">
-    <div class="w3-display-container">
-      <img src="${book.bookImageURL}" alt="${book.bookTitle}" style="width:80%" class="w3-display-middle">
-    </div>
-    <div class="w3-container">
-      <h5 class="product-title">${book.bookTitle}</h5>
-      <p class="product-description">${book.bookDescription}</p>
-    </div>
-  </div>
-</div>
-
+        <div class="w3-card w3-padding">
+          <div class="w3-display-container">
+            <img src="${book.bookImageURL}" alt="${book.bookTitle}" style="width:80%" class="w3-display-middle">
+          </div>
+          <div class="w3-container">
+            <h5 class="product-title">${book.bookTitle}</h5>
+            <p class="product-description">${book.bookDescription}</p>
+          </div>
+        </div>
+      </div>
       `;
     }
 
@@ -74,3 +89,4 @@
   </script>
 </body>
 </html>
+
