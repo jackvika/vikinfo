@@ -42,15 +42,18 @@
 
     function generateBookCard(book) {
       return `
-        <div class="col-md-4">
-          <div class="w3-card w3-padding">
-            <img src="${book.bookImageURL}" alt="${book.bookTitle}" style="width:100%">
-            <div class="w3-container">
-              <h5 class="product-title">${book.bookTitle}</h5>
-              <p class="product-description">${book.bookDescription}</p>
-            </div>
-          </div>
-        </div>
+       <div class="col-md-4">
+  <div class="w3-card w3-padding">
+    <div class="w3-display-container">
+      <img src="${book.bookImageURL}" alt="${book.bookTitle}" style="width:80%" class="w3-display-middle">
+    </div>
+    <div class="w3-container">
+      <h5 class="product-title">${book.bookTitle}</h5>
+      <p class="product-description">${book.bookDescription}</p>
+    </div>
+  </div>
+</div>
+
       `;
     }
 
