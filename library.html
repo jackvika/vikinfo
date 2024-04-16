@@ -6,51 +6,6 @@
   <title>Book Donation Library</title>
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <style>
-    
-    body {
-      background-color: #ffffff; /* White background */
-      color: #333333; /* Dark text */
-      margin: 0;
-      padding-bottom: 80px; /* Adjusted padding for sticky footer */
-    }
-    .product-card {
-      background-color: #ffffff;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-      margin-bottom: 20px;
-      overflow: hidden;
-    }
-    .product-image {
-      width: 100%;
-      height: auto;
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
-    }
-    .product-details {
-      padding: 20px;
-    }
-    .product-title {
-      font-weight: bold;
-      color: #333333;
-      margin-bottom: 10px;
-    }
-    .product-description {
-      color: #666666;
-      margin-bottom: 10px;
-    }
-    .footer {
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      background-color: #3b5998; /* Darker blue footer */
-      color: #ffffff;
-      text-align: center;
-      padding: 20px 0;
-    }
-    
-  </style>
 </head>
 <body>
 
@@ -63,11 +18,12 @@
     <div class="row" id="bookRow"></div>
   </div>
 
-  <footer class="footer">
+  <footer class="w3-container w3-blue w3-center py-3">
     <div class="container">
       <p>&copy; 2024 Vikinfo. All rights reserved.</p>
     </div>
   </footer>
+
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
   <script>
@@ -87,9 +43,9 @@
     function generateBookCard(book) {
       return `
         <div class="col-md-4">
-          <div class="product-card">
-            <img src="${book.bookImageURL}" alt="${book.bookTitle}" class="product-image">
-            <div class="product-details">
+          <div class="w3-card w3-padding">
+            <img src="${book.bookImageURL}" alt="${book.bookTitle}" style="width:100%">
+            <div class="w3-container">
               <h5 class="product-title">${book.bookTitle}</h5>
               <p class="product-description">${book.bookDescription}</p>
             </div>
@@ -115,4 +71,3 @@
   </script>
 </body>
 </html>
-
