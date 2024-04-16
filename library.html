@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
-    /* Custom styles */
+    
     body {
       background-color: #ffffff; /* White background */
       color: #333333; /* Dark text */
@@ -22,8 +22,8 @@
       overflow: hidden;
     }
     .product-image {
-      width: 100%;
-      height: auto;
+      width: 80%;
+      height: 80%;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
     }
@@ -39,15 +39,7 @@
       color: #666666;
       margin-bottom: 10px;
     }
-    footer {
-      background-color: #3b5998; /* Darker blue footer */
-      color: #ffffff;
-      padding: 20px 0;
-      text-align: center;
-      position: fixed;
-      width: 100%;
-      bottom: 0;
-    }
+    
   </style>
 </head>
 <body>
@@ -61,12 +53,11 @@
     <div class="row" id="bookRow"></div>
   </div>
 
-  <footer class="w3-container w3-blue w3-center py-4">
-    <div class="container">
-      <p>&copy; 2024 Vikinfo. All rights reserved.</p>
+  <footer class="bg-primary text-light py-3 w3-animate-top">
+    <div class="container text-center">
+      <p class="mb-0">&copy; 2024 Vikinfo. All rights reserved.</p>
     </div>
   </footer>
-
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
   <script>
